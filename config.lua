@@ -18,7 +18,7 @@ lvim.leader = "space"
 
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
-lvim.keys.normal_mode["<C-w>"] = ":bd<cr>"
+-- lvim.keys.normal_mode["<C-w>"] = ":bd<cr>"
 
 -- switch chars
 -- lvim.keys.normal_mode["<C-r>"] = "xhhpl"
@@ -309,6 +309,9 @@ lvim.plugins = {
     config = function()
       vim.g.matchup_matchparen_offscreen = { method = "pop" }
     end,
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim"
   }
 }
 
