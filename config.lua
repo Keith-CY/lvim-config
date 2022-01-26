@@ -11,7 +11,8 @@ an executable
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.colorscheme = "tokyonight"
+-- lvim.colorscheme = "tokyonight"
+lvim.colorscheme = "nightfox"
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -51,16 +52,22 @@ lvim.builtin.telescope.defaults.mappings = {
 }
 
 -- Use which-key to add extra bindings with the leader-key prefix
--- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
--- lvim.builtin.which_key.mappings["t"] = {
---   name = "+Trouble",
---   r = { "<cmd>Trouble lsp_references<cr>", "References" },
---   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
---   d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
---   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
---   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
---   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
--- }
+lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+lvim.builtin.which_key.mappings["t"] = {
+  name = "+Trouble",
+  r = { "<cmd>Trouble lsp_references<cr>", "References" },
+  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+  d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
+  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+  w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
+}
+lvim.builtin.which_key.mappings["i"] = {
+  name = "Toggle Term",
+  v = {"<cmd>ToggleTerm direction=horizontal<cr>", "Horizontal" },
+  x = {"<cmd>ToggleTerm direction=vertical<cr>", "Vertical" },
+  t = {"<cmd>ToggleTermToggleAll<cr>", "Toggle" },
+}
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
@@ -88,6 +95,8 @@ lvim.builtin.treesitter.ensure_installed = {
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
+-- vim.o.linenumber = true
+vim.o.relativenumber = true
 -- generic LSP settings
 
 -- ---@usage disable automatic installation of servers
@@ -158,8 +167,8 @@ lvim.builtin.treesitter.highlight.enabled = true
 
 -- Additional Plugins
 lvim.plugins = {
---    {"shaunsingh/nord.nvim"},
-    {"folke/tokyonight.nvim"},
+    {"EdenEast/nightfox.nvim"},
+    -- {"folke/tokyonight.nvim"},
     {
       "folke/trouble.nvim",
       cmd = "TroubleToggle",
@@ -181,7 +190,7 @@ lvim.plugins = {
     --   "wfxr/minimap.vim",
     --   run = "cargo install --locked code-minimap",
     --   config = function()
-    --     vim.cmd ("let g:minimap_width = 10")
+    --     vim.cmd ("let g:minimap_width = 30")
     --     vim.cmd ("let g:minimap_auto_start = 1")
     --     vim.cmd ("let g:minimap_auto_start_win_enter = 1")
     --   end,
@@ -218,6 +227,9 @@ lvim.plugins = {
   {
     "pwntester/octo.nvim",
     event = "BufRead",
+    config = function()
+      require"octo".setup()
+    end
   },
   {
     "windwp/nvim-ts-autotag",
@@ -311,7 +323,14 @@ lvim.plugins = {
     end,
   },
   {
-    "lukas-reineke/indent-blankline.nvim"
+    "lukas-reineke/indent-blankline.nvim",
+    config = function()
+      require("indent_blankline").setup {
+        space_char_blankline = " ",
+        show_current_context = true,
+        show_current_context_start = true,
+      }
+    end
   }
 }
 
@@ -348,3 +367,5 @@ lvim.builtin.lualine.sections.lualine_x = {
 --   components.filetype,
 --   components.scrollbar
 -- }
+
+-- vim config
