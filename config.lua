@@ -64,8 +64,8 @@ lvim.builtin.which_key.mappings["t"] = {
 }
 lvim.builtin.which_key.mappings["i"] = {
   name = "Toggle Term",
-  v = {"<cmd>ToggleTerm direction=horizontal<cr>", "Horizontal" },
-  x = {"<cmd>ToggleTerm direction=vertical<cr>", "Vertical" },
+  v = {"<cmd>ToggleTerm direction=vertical<cr>", "Vertical" },
+  x = {"<cmd>ToggleTerm direction=horizontal<cr>", "Horizontal" },
   t = {"<cmd>ToggleTermToggleAll<cr>", "Toggle" },
 }
 
@@ -107,18 +107,23 @@ vim.o.relativenumber = true
 -- vim.list_extend(lvim.lsp.override, { "pyright" })
 
 -- ---@usage setup a server -- see: https://www.lunarvim.org/languages/#overriding-the-default-configuration
--- local opts = {} -- check the lspconfig documentation for a list of all possible options
+local opts = {} -- check the lspconfig documentation for a list of all possible options
 -- require("lvim.lsp.manager").setup("pylsp", opts)
 
 -- you can set a custom on_attach function that will be used for all the language servers
 -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
--- lvim.lsp.on_attach_callback = function(client, bufnr)
---   local function buf_set_option(...)
---     vim.api.nvim_buf_set_option(bufnr, ...)
---   end
---   --Enable completion triggered by <c-x><c-o>
---   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
--- end
+lvim.lsp.on_attach_callback = function(client, bufnr)
+  local function buf_set_option(...)
+    vim.api.nvim_buf_set_option(bufnr, ...)
+  end
+
+  --Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-K>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+
+end
 -- you can overwrite the null_ls setup table (useful for setting the root_dir function)
 -- lvim.lsp.null_ls.setup.root_dir = require("lspconfig").util.root_pattern("Makefile", ".git", "node_modules")
 -- or if you need something more advanced
@@ -331,6 +336,9 @@ lvim.plugins = {
         show_current_context_start = true,
       }
     end
+  },
+  {
+    "github/copilot.vim"
   }
 }
 
@@ -350,11 +358,11 @@ lvim.builtin.lualine.sections.lualine_b = {
   components.filename,
 }
 lvim.builtin.lualine.sections.lualine_c = {
-  components.diff,
+  components.diagnostics,
   components.location,
+  components.diff,
 }
 lvim.builtin.lualine.sections.lualine_x = {
-  components.diagnostics,
   components.treesitter,
   components.lsp,
   components.encoding,
