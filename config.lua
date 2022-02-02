@@ -353,6 +353,12 @@ lvim.plugins = {
     config = function()
       require("todo-comments").setup()
     end
+  },
+  {
+    "ellisonleao/glow.nvim"
+  },
+  {
+    "metakirby5/codi.vim"
   }
 }
 
