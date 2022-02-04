@@ -75,6 +75,13 @@ lvim.builtin.which_key.mappings["d"] = {
   h = {"<cmd>DiffviewFileHistory<CR>", "File History"}
 }
 
+lvim.builtin.which_key.mappings["S"] = {
+  name = "Spectre",
+  o = {"<cmd>:lua require('spectre').open()<CR>", "Open"},
+  w = {"<cmd>:lua require('spectre').open_visual({select_word=true})<CR>", "Search selected word"},
+  i = {"<cmd>:lua require('spectre').open_file_search()<CR>", "Search in current file"},
+}
+
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.dashboard.active = true
@@ -323,7 +330,9 @@ lvim.plugins = {
     "ray-x/lsp_signature.nvim",
     event = "BufRead",
     config = function()
-      require "lsp_signature".setup()
+      require "lsp_signature".setup({
+        hint_prefix = "⭐️ "
+      })
     end
   },
   {
