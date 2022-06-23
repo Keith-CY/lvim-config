@@ -11,6 +11,7 @@ an executable
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = true
+-- lvim.format_on_save = false
 -- lvim.colorscheme = "tokyonight"
 lvim.colorscheme = "nightfox"
 
@@ -352,9 +353,9 @@ lvim.plugins = {
       }
     end
   },
-  {
-    "github/copilot.vim"
-  },
+  -- {
+  --   "github/copilot.vim"
+  -- },
   {
     "folke/todo-comments.nvim",
     event = "BufRead",
