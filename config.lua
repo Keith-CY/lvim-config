@@ -10,8 +10,8 @@ an executable
 
 -- general
 lvim.log.level = "warn"
-lvim.format_on_save = true
 -- lvim.format_on_save = false
+lvim.format_on_save = true
 -- lvim.colorscheme = "tokyonight"
 lvim.colorscheme = "nightfox"
 
@@ -153,19 +153,32 @@ end
 -- end
 
 -- set a formatter, this will override the language server formatting capabilities (if it exists)
--- local formatters = require "lvim.lsp.null-ls.formatters"
--- formatters.setup {
---   { exe = "black", filetypes = { "python" } },
---   { exe = "isort", filetypes = { "python" } },
---   {
---     exe = "prettier",
---     ---@usage arguments to pass to the formatter
---     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
---     args = { "--print-width", "120" },
---     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
---     filetypes = { "javascript", "typescript", "typescriptreact" },
---   },
--- }
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  -- { exe = "black", filetypes = { "python" } },
+  -- { exe = "isort", filetypes = { "python" } },
+  {
+    exe = "prettier",
+    ---@usage arguments to pass to the formatter
+    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+    args = {
+      "--print-width", "120"
+    },
+    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+    -- filetypes = {
+    --   "javascript",
+    --   "javascriptreact",
+    --   "typescript",
+    --   "typescriptreact",
+    --   "scss",
+    --   "css",
+    --   "html",
+    --   "json",
+    --   "yaml",
+    --   "markdown"
+    -- },
+  },
+}
 
 -- -- set additional linters
 -- local linters = require "lvim.lsp.null-ls.linters"
@@ -184,8 +197,12 @@ end
 --   },
 -- }
 
--- Additional Plugins
+-- set fold
+-- vim.opt.foldmethod = "expr"
+-- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
 lvim.plugins = {
+-- Additional Plugins
     {"EdenEast/nightfox.nvim"},
     -- {"folke/tokyonight.nvim"},
     {
@@ -369,6 +386,10 @@ lvim.plugins = {
   },
   {
     "metakirby5/codi.vim"
+  },
+{
+    "mrjones2014/dash.nvim",
+    run = "make install"
   }
 }
 
@@ -407,3 +428,5 @@ lvim.builtin.lualine.sections.lualine_x = {
 -- }
 
 -- vim config
+-- extends telescope
+lvim.builtin.telescope.extensions.dash = {}
