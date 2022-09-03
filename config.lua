@@ -8,19 +8,21 @@ an executable
 ]]
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
--- general
+--[[
+  general
+]]--
 lvim.log.level = "warn"
--- lvim.format_on_save = false
 lvim.format_on_save = true
--- lvim.colorscheme = "tokyonight"
 lvim.colorscheme = "nightfox"
 
--- keymappings [view all the defaults by pressing <leader>Lk]
-lvim.leader = "space"
+-- lvim.format_on_save = false
 
+--[[
+  keymappings [view all the defaults by pressing <leader>Lk]
+]]--
+lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
--- lvim.keys.normal_mode["<C-w>"] = ":bd<cr>"
 
 -- switch chars
 -- lvim.keys.normal_mode["<C-r>"] = "xhhpl"
@@ -83,9 +85,14 @@ lvim.builtin.which_key.mappings["S"] = {
   i = {"<cmd>:lua require('spectre').open_file_search()<CR>", "Search in current file"},
 }
 
+lvim.builtin.which_key.mappings["R"] = {
+  name = "RnvimrToggle",
+  t = {"<cmd>RnvimrToggle<CR>", "Toggle"},
+  r = {"<cmd>RnvimrResize<CR>", "Resize"},
+}
+
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-lvim.builtin.dashboard.active = true
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
@@ -94,19 +101,19 @@ lvim.builtin.nvimtree.show_icons.git = 0
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
-  "c",
+  "html",
   "javascript",
-  "json",
+  "typescript",
   "lua",
   "python",
-  "typescript",
   "css",
+  "scss",
   "rust",
-  "java",
+  "json",
   "yaml",
 }
 
-lvim.builtin.treesitter.ignore_install = { "haskell" }
+lvim.builtin.treesitter.ignore_install = {}
 lvim.builtin.treesitter.highlight.enabled = true
 
 -- vim.o.linenumber = true
@@ -126,6 +133,7 @@ vim.o.relativenumber = true
 
 -- you can set a custom on_attach function that will be used for all the language servers
 -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
+
 lvim.lsp.on_attach_callback = function(_client, bufnr)
   local function buf_set_option(...)
     vim.api.nvim_buf_set_option(bufnr, ...)
@@ -136,8 +144,8 @@ lvim.lsp.on_attach_callback = function(_client, bufnr)
 
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-K>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-
 end
+
 -- you can overwrite the null_ls setup table (useful for setting the root_dir function)
 -- lvim.lsp.null_ls.setup.root_dir = require("lspconfig").util.root_pattern("Makefile", ".git", "node_modules")
 -- or if you need something more advanced
@@ -152,7 +160,9 @@ end
 --   end
 -- end
 
--- set a formatter, this will override the language server formatting capabilities (if it exists)
+--[[
+  set a formatter, this will override the language server formatting capabilities (if it exists)
+]]--
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   -- { exe = "black", filetypes = { "python" } },
@@ -178,11 +188,45 @@ formatters.setup {
     --   "markdown"
     -- },
   },
+  {
+    exe = 'eslint',
+    filetypes = {
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact"
+    }
+  },
+  {
+    exe = 'lua-format',
+    filetype = {
+      'lua'
+    }
+  },
 }
 
--- -- set additional linters
--- local linters = require "lvim.lsp.null-ls.linters"
--- linters.setup {
+--[[
+set additional linters
+]]--
+
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  {
+    exe = 'eslint',
+    filetypes = {
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact"
+    }
+  },
+  {
+    exe = 'luacheck',
+    filetype = {
+      'selene'
+    }
+  },
+
 --   { exe = "flake8", filetypes = { "python" } },
 --   {
 --     exe = "shellcheck",
@@ -195,11 +239,11 @@ formatters.setup {
 --     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
 --     filetypes = { "javascript", "typescript", "python" },
 --   },
--- }
+}
 
--- set fold
--- vim.opt.foldmethod = "expr"
--- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+--[[
+  user plugins
+]]--
 
 lvim.plugins = {
 -- Additional Plugins
@@ -296,7 +340,7 @@ lvim.plugins = {
     config = function()
     require('goto-preview').setup {
           width = 120; -- Width of the floating window
-          height = 25; -- Height of the floating window
+          height = 80; -- Height of the floating window
           default_mappings = true; -- Bind default mappings
           debug = false; -- Print debug information
           opacity = nil; -- 0-100 opacity level of the floating window where 100 is fully transparent.
@@ -382,24 +426,80 @@ lvim.plugins = {
     end
   },
   {
-    "ellisonleao/glow.nvim"
+    "ellisonleao/glow.nvim",
+    config = function ()
+      require('glow').setup({
+        width = 120
+      })
+    end
   },
   {
     "metakirby5/codi.vim"
   },
-{
+  {
     "mrjones2014/dash.nvim",
     run = "make install"
+  },
+{
+    'kevinhwang91/rnvimr',
+    cmd = 'RnvimrToggle',
+    config = function()
+      vim.g.rnvimr_draw_border = 1
+      vim.g.rnvimr_pick_enable = 1
+      vim.g.rnvimr_bw_enable = 1
+    end
+  },
+{
+    "aca/emmet-ls",
+    config = function()
+      local lspconfig = require('lspconfig')
+      local configs = require('lspconfig/configs')
+
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities.textDocument.completion.completionItem.snippetSupport = true
+      capabilities.textDocument.completion.completionItem.resolveSupport = {
+        properties = {
+          "documentation",
+          "detail",
+          "additionalTextEdits",
+        },
+      }
+
+      if not lspconfig.emmet_ls then
+        configs.emmet_ls = {
+          cmd = {"emmet-ls", "--stdio"},
+          filetypes = {
+            "html",
+            "css",
+            "scss",
+            "sass",
+            "javascript",
+            "typescript",
+            "javascriptreact",
+            "typescriptreact",
+          },
+          root_dir = function()
+            return vim.loop.cwd()
+          end,
+          settings = {}
+        }
+      end
+      lspconfig.emmet_ls.setup({
+        capabilities = capabilities,
+      })
+    end
   }
 }
+
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {
 --   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
 -- }
 
-
--- statusline
+--[[
+  statusline
+]]--
 local components = require("lvim.core.lualine.components")
 lvim.builtin.lualine.sections.lualine_a = {
   components.mode,
@@ -407,10 +507,10 @@ lvim.builtin.lualine.sections.lualine_a = {
 lvim.builtin.lualine.sections.lualine_b = {
   components.branch,
   components.filename,
+  components.location,
 }
 lvim.builtin.lualine.sections.lualine_c = {
   components.diagnostics,
-  components.location,
   components.diff,
 }
 lvim.builtin.lualine.sections.lualine_x = {
@@ -420,13 +520,9 @@ lvim.builtin.lualine.sections.lualine_x = {
   components.spaces,
   components.filetype,
 }
--- lvim.builtin.lualine.sections.lualine_y = {
--- }
--- lvim.builtin.lualine.sections.lualine_z = {
---   components.filetype,
---   components.scrollbar
--- }
 
 -- vim config
--- extends telescope
+--[[
+  extends telescope
+]]--
 lvim.builtin.telescope.extensions.dash = {}
