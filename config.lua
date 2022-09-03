@@ -1,31 +1,32 @@
 --[[
   general
-]]--
+]]
+--
 vim.o.relativenumber = true
 lvim.log.level = "warn"
 lvim.format_on_save = true
 lvim.colorscheme = "nightfox"
--- lvim.format_on_save = false
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+-- vim.api.nvim_set_var("cursorhold_updatetime", 1000)
+-- lvim.format_on_save = false
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
 local _, actions = pcall(require, "telescope.actions")
 lvim.builtin.telescope.defaults.mappings = {
-  -- for input mode
-  i = {
-    ["<C-j>"] = actions.move_selection_next,
-    ["<C-k>"] = actions.move_selection_previous,
-    ["<C-n>"] = actions.cycle_history_next,
-    ["<C-p>"] = actions.cycle_history_prev,
-  },
-  -- for normal mode
-  n = {
-    ["<C-j>"] = actions.move_selection_next,
-    ["<C-k>"] = actions.move_selection_previous,
-  },
+	-- for input mode
+	i = {
+		["<C-j>"] = actions.move_selection_next,
+		["<C-k>"] = actions.move_selection_previous,
+		["<C-n>"] = actions.cycle_history_next,
+		["<C-p>"] = actions.cycle_history_prev,
+	},
+	-- for normal mode
+	n = {
+		["<C-j>"] = actions.move_selection_next,
+		["<C-k>"] = actions.move_selection_previous,
+	},
 }
-
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
@@ -36,17 +37,17 @@ lvim.builtin.nvimtree.show_icons.git = 0
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
-  "bash",
-  "html",
-  "javascript",
-  "typescript",
-  "lua",
-  "python",
-  "css",
-  "scss",
-  "rust",
-  "json",
-  "yaml",
+	"bash",
+	"html",
+	"javascript",
+	"typescript",
+	"lua",
+	"python",
+	"css",
+	"scss",
+	"rust",
+	"json",
+	"yaml",
 }
 
 lvim.builtin.treesitter.ignore_install = {}
@@ -69,15 +70,15 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
 
 lvim.lsp.on_attach_callback = function(_client, bufnr)
-  local function buf_set_option(...)
-    vim.api.nvim_buf_set_option(bufnr, ...)
-  end
+	local function buf_set_option(...)
+		vim.api.nvim_buf_set_option(bufnr, ...)
+	end
 
-  --Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+	--Enable completion triggered by <c-x><c-o>
+	buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-K>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+	-- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-K>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+	-- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
 end
 
 -- you can overwrite the null_ls setup table (useful for setting the root_dir function)
@@ -94,19 +95,14 @@ end
 --   end
 -- end
 
-
-
-
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {
 --   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
 -- }
 
-
-
-require('user.lualine').setup()
-require('user.which_key').setup()
-require('user.plugins').setup()
-require('user.formatters').setup()
-require('user.linters').setup()
-
+require("user.lualine").setup()
+require("user.which_key").setup()
+require("user.plugins").setup()
+require("user.formatters").setup()
+require("user.linters").setup()
+require("user.lsp").setup()
