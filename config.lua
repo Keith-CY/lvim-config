@@ -3,11 +3,14 @@
 ]]
 --
 vim.o.relativenumber = true
+vim.g.catppuccin_flavour = "frappe" -- latte, frappe, macchiato, mocha
 lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.colorscheme = "nightfox"
+-- lvim.colorscheme = "nightfox"
+-- lvim.colorscheme = "synthwave84"
+lvim.colorscheme = "catppuccin"
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
--- vim.api.nvim_set_var("cursorhold_updatetime", 1000)
+vim.api.nvim_set_var("cursorhold_updatetime", 1000)
 -- lvim.format_on_save = false
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
@@ -100,6 +103,8 @@ end
 --   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
 -- }
 
+require("user.dashboard").setup()
+require("user.bufferline").setup()
 require("user.lualine").setup()
 require("user.which_key").setup()
 require("user.plugins").setup()

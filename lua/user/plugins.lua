@@ -4,6 +4,7 @@ M.setup = function()
 	lvim.plugins = {
 		-- Additional Plugins
 		{ "EdenEast/nightfox.nvim" },
+		{ "catppuccin/nvim", as = "catppuccin" },
 		-- {"folke/tokyonight.nvim"},
 		{
 			"folke/trouble.nvim",
@@ -261,9 +262,6 @@ M.setup = function()
 				"DevDocs",
 				"DevDocsAll",
 			},
-		},
-		{
-			"antoinemadec/FixCursorHold.nvim",
 		},
 	}
 end

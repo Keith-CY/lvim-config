@@ -28,15 +28,15 @@ M.setup = function()
 				"lua",
 			},
 		},
-		{
-			exe = "eslint",
-			filetypes = {
-				"javascript",
-				"javascriptreact",
-				"typescript",
-				"typescriptreact",
-			},
-		},
+		-- {
+		-- 	exe = "eslint",
+		-- 	filetypes = {
+		-- 		"javascript",
+		-- 		"javascriptreact",
+		-- 		"typescript",
+		-- 		"typescriptreact",
+		-- 	},
+		-- },
 		{
 			exe = "stylua",
 			filetype = {

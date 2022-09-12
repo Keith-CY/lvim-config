@@ -3,15 +3,15 @@ local M = {}
 M.setup = function()
 	local linters = require("lvim.lsp.null-ls.linters")
 	linters.setup({
-		{
-			exe = "eslint",
-			filetypes = {
-				"javascript",
-				"javascriptreact",
-				"typescript",
-				"typescriptreact",
-			},
-		},
+		-- {
+		-- 	exe = "eslint",
+		-- 	filetypes = {
+		-- 		"javascript",
+		-- 		"javascriptreact",
+		-- 		"typescript",
+		-- 		"typescriptreact",
+		-- 	},
+		-- },
 		{
 			exe = "luacheck",
 			filetype = {
