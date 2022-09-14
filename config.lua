@@ -9,6 +9,7 @@ lvim.format_on_save = true
 -- lvim.colorscheme = "nightfox"
 -- lvim.colorscheme = "synthwave84"
 lvim.colorscheme = "catppuccin"
+lvim.transparent_window = true
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 vim.api.nvim_set_var("cursorhold_updatetime", 1000)
 -- lvim.format_on_save = false
@@ -29,6 +30,9 @@ lvim.builtin.telescope.defaults.mappings = {
 		["<C-j>"] = actions.move_selection_next,
 		["<C-k>"] = actions.move_selection_previous,
 	},
+}
+lvim.builtin.telescope.defaults.path_display = {
+	"smart",
 }
 
 -- TODO: User Config for predefined plugins
@@ -111,3 +115,4 @@ require("user.plugins").setup()
 require("user.formatters").setup()
 require("user.linters").setup()
 require("user.lsp").setup()
+require("user.theme").setup()

@@ -7,7 +7,14 @@ M.setup = function()
 	}
 	lvim.builtin.lualine.sections.lualine_b = {
 		components.branch,
-		components.filename,
+		{
+			"filename",
+			color = {},
+			cond = nil,
+			file_status = true,
+			path = 1,
+		},
+		-- components.filename,
 		components.location,
 	}
 	lvim.builtin.lualine.sections.lualine_c = {
@@ -20,6 +27,13 @@ M.setup = function()
 		components.encoding,
 		components.spaces,
 		components.filetype,
+	}
+	lvim.builtin.lualine.inactive_sections.lualine_c = {
+		{
+			"filename",
+			file_status = true,
+			path = 1,
+		},
 	}
 end
 

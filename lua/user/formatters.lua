@@ -12,6 +12,10 @@ M.setup = function()
 			args = {
 				"--print-width",
 				"120",
+				"--no-semi",
+				"--single-quote",
+				-- "--no-bracket-spacing",
+				-- "false",
 			},
 			---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
 			filetypes = {
