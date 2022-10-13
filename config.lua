@@ -11,6 +11,8 @@ lvim.format_on_save = true
 lvim.colorscheme = "catppuccin"
 lvim.transparent_window = true
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+lvim.keys.normal_mode["<S-h>"] = ":bp<cr>"
+lvim.keys.normal_mode["<S-l>"] = ":bn<cr>"
 vim.api.nvim_set_var("cursorhold_updatetime", 1000)
 -- lvim.format_on_save = false
 
@@ -41,6 +43,7 @@ lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.actions.open_file.resize_window = true
+lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
