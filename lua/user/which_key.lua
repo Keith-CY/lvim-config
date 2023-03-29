@@ -34,6 +34,8 @@ M.setup = function()
 		o = { "<cmd>:lua require('spectre').open()<CR>", "Open" },
 		w = { "<cmd>:lua require('spectre').open_visual({select_word=true})<CR>", "Search selected word" },
 		i = { "<cmd>:lua require('spectre').open_file_search()<CR>", "Search in current file" },
+		R = { "<cmd>:lua require('spectre.actions').run_replace()<CR>", "Replace all" },
+		r = { "<cmd>:lua require('spectre.actions').run_current_replace()<CR>", "Replace current line" },
 	}
 
 	lvim.builtin.which_key.mappings["R"] = {
