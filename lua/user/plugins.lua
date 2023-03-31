@@ -235,8 +235,31 @@ M.setup = function()
 			end,
 		},
 		-- {
-		--   "github/copilot.vim"
+		-- 	"github/copilot.vim",
 		-- },
+		{
+			"zbirenbaum/copilot.lua",
+			-- event = { "VimEnter" },
+			config = function()
+				vim.defer_fn(function()
+					require("copilot").setup({
+						plugin_manager_path = get_runtime_dir() .. "/site/pack/packer",
+						panel = {
+							enabled = true,
+						},
+						suggestion = {
+							enabled = true,
+							auto_trigger = true,
+							keymap = {
+								accept = "<S-CR>",
+							},
+						},
+					})
+				end, 100)
+			end,
+		},
+
+		{ "zbirenbaum/copilot-cmp", after = { "copilot.lua", "nvim-cmp" } },
 		{
 			"folke/todo-comments.nvim",
 			event = "BufRead",

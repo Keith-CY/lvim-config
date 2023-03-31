@@ -19,6 +19,7 @@ M.setup = function()
 		name = "Toggle Term",
 		v = { "<cmd>ToggleTerm direction=vertical<cr>", "Vertical" },
 		x = { "<cmd>ToggleTerm direction=horizontal<cr>", "Horizontal" },
+		f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
 		t = { "<cmd>ToggleTermToggleAll<cr>", "Toggle" },
 	}
 
@@ -42,6 +43,12 @@ M.setup = function()
 		name = "RnvimrToggle",
 		t = { "<cmd>RnvimrToggle<CR>", "Toggle" },
 		r = { "<cmd>RnvimrResize<CR>", "Resize" },
+	}
+
+	lvim.builtin.which_key.mappings["C"] = {
+		name = "Copilot",
+		p = { "<cmd>Copilot Panel<CR>", "Panel" },
+		l = { "<cmd>:lua require('copilot.suggestion').accet_line()<CR>", "Accept Line" },
 	}
 end
 

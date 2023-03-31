@@ -109,6 +109,9 @@ end
 --   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
 -- }
 
+lvim.builtin.cmp.formatting.source_names["copilot"] = "(Copilot)"
+table.insert(lvim.builtin.cmp.sources, 1, { name = "copilot" })
+
 require("user.dashboard").setup()
 require("user.bufferline").setup()
 require("user.lualine").setup()
@@ -118,3 +121,4 @@ require("user.formatters").setup()
 require("user.linters").setup()
 require("user.lsp").setup()
 require("user.theme").setup()
+require("user.nvim-tree").setup()

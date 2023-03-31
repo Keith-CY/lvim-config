@@ -3,7 +3,7 @@ local M = {}
 M.setup = function()
 	local components = require("lvim.core.lualine.components")
 	lvim.builtin.lualine.sections.lualine_a = {
-		components.mode,
+		"mode",
 	}
 	lvim.builtin.lualine.sections.lualine_b = {
 		components.branch,
