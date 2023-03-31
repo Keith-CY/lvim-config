@@ -4,7 +4,7 @@ M.setup = function()
 	lvim.plugins = {
 		-- Additional Plugins
 		{ "EdenEast/nightfox.nvim" },
-		{ "catppuccin/nvim", as = "catppuccin" },
+		{ "catppuccin/nvim", name = "catppuccin" },
 		-- {"folke/tokyonight.nvim"},
 		{
 			"folke/trouble.nvim",
@@ -263,7 +263,7 @@ M.setup = function()
 		{
 			"folke/todo-comments.nvim",
 			event = "BufRead",
-			requires = "nvim-lua/plenary.nvim",
+			dependencies = "nvim-lua/plenary.nvim",
 			config = function()
 				require("todo-comments").setup()
 			end,
@@ -281,7 +281,7 @@ M.setup = function()
 		},
 		{
 			"mrjones2014/dash.nvim",
-			run = "make install",
+			build = "make install",
 		},
 		{
 			"kevinhwang91/rnvimr",
