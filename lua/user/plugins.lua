@@ -234,32 +234,47 @@ M.setup = function()
 				})
 			end,
 		},
-		-- {
-		-- 	"github/copilot.vim",
-		-- },
 		{
 			"zbirenbaum/copilot.lua",
-			-- event = { "VimEnter" },
+			after = { "copilot.lua", "nvim-cmp" },
 			config = function()
 				vim.defer_fn(function()
 					require("copilot").setup({
-						plugin_manager_path = get_runtime_dir() .. "/site/pack/packer",
 						panel = {
 							enabled = true,
+							auto_refresh = true,
+							keymap = {
+								jump_prev = "[[",
+								jump_next = "]]",
+								accept = "<S-CR>",
+								refresh = "gr",
+								open = "<M-CR>",
+							},
+							layout = {
+								position = "bottom", -- | top | left | right
+								ratio = 0.4,
+							},
 						},
 						suggestion = {
 							enabled = true,
 							auto_trigger = true,
+							debounce = 75,
 							keymap = {
 								accept = "<S-CR>",
+								accept_word = false,
+								accept_line = false,
+								prev = "<M-[>",
+								next = "<M-]>",
+								dismiss = "ESC",
 							},
 						},
+						filetypes = { ["*"] = true },
+						copilot_node_command = "node",
 					})
 				end, 100)
 			end,
 		},
 
-		{ "zbirenbaum/copilot-cmp", after = { "copilot.lua", "nvim-cmp" } },
 		{
 			"folke/todo-comments.nvim",
 			event = "BufRead",
@@ -294,16 +309,6 @@ M.setup = function()
 		},
 		{
 			"aca/emmet-ls",
-			-- ft = {
-			--   "html",
-			--   "javascript",
-			--   "typescript",
-			--   "javascriptreact",
-			--   "typescriptreact",
-			--   "css",
-			--   "scss",
-			--   "sass",
-			-- }
 			config = function()
 				local lspconfig = require("lspconfig")
 				local configs = require("lspconfig/configs")
@@ -342,13 +347,27 @@ M.setup = function()
 				})
 			end,
 		},
-		{
-			"rhysd/devdocs.vim",
-			cmd = {
-				"DevDocs",
-				"DevDocsAll",
-			},
-		},
+		-- {
+		-- 	"rhysd/devdocs.vim",
+		-- 	cmd = {
+		-- 		"DevDocs",
+		-- 		"DevDocsAll",
+		-- 	},
+		-- },
+		-- {
+		-- 	"jackMort/ChatGPT.nvim",
+		-- 	event = "VeryLazy",
+		-- 	config = function()
+		-- 		require("chatgpt").setup({
+		-- 			api_key_cmd = "cat ~/.config/lvim/gpt_key",
+		-- 		})
+		-- 	end,
+		-- 	dependencies = {
+		-- 		"MunifTanjim/nui.nvim",
+		-- 		"nvim-lua/plenary.nvim",
+		-- 		"nvim-telescope/telescope.nvim",
+		-- 	},
+		-- },
 	}
 end
 
