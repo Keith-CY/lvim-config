@@ -61,13 +61,13 @@ M.setup = function()
 				vim.g.gitblame_enabled = 0
 			end,
 		},
-		{
-			"pwntester/octo.nvim",
-			event = "BufRead",
-			config = function()
-				require("octo").setup()
-			end,
-		},
+		-- 	{
+		-- 		"pwntester/octo.nvim",
+		-- 		event = "BufRead",
+		-- 		config = function()
+		-- 			require("octo").setup()
+		-- 		end,
+		-- 	},
 		{
 			"windwp/nvim-ts-autotag",
 			event = "InsertEnter",
@@ -178,6 +178,7 @@ M.setup = function()
 				})
 			end,
 		},
+
 		{
 			"kevinhwang91/nvim-bqf",
 			event = { "BufRead", "BufNew" },
@@ -217,13 +218,14 @@ M.setup = function()
 				})
 			end,
 		},
-		{
-			"andymass/vim-matchup",
-			event = "CursorMoved",
-			config = function()
-				vim.g.matchup_matchparen_offscreen = { method = "pop" }
-			end,
-		},
+		-- 	broken plugin
+		-- {
+		-- 	"andymass/vim-matchup",
+		-- 	event = "CursorMoved",
+		-- 	config = function()
+		-- 		vim.g.matchup_matchparen_offscreen = { method = "pop" }
+		-- 	end,
+		-- },
 		{
 			"lukas-reineke/indent-blankline.nvim",
 			config = function()
@@ -347,27 +349,6 @@ M.setup = function()
 				})
 			end,
 		},
-		-- {
-		-- 	"rhysd/devdocs.vim",
-		-- 	cmd = {
-		-- 		"DevDocs",
-		-- 		"DevDocsAll",
-		-- 	},
-		-- },
-		-- {
-		-- 	"jackMort/ChatGPT.nvim",
-		-- 	event = "VeryLazy",
-		-- 	config = function()
-		-- 		require("chatgpt").setup({
-		-- 			api_key_cmd = "cat ~/.config/lvim/gpt_key",
-		-- 		})
-		-- 	end,
-		-- 	dependencies = {
-		-- 		"MunifTanjim/nui.nvim",
-		-- 		"nvim-lua/plenary.nvim",
-		-- 		"nvim-telescope/telescope.nvim",
-		-- 	},
-		-- },
 	}
 end
 
