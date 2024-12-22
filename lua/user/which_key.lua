@@ -50,6 +50,24 @@ M.setup = function()
 		p = { "<cmd>Copilot Panel<CR>", "Panel" },
 		l = { "<cmd>:lua require('copilot.suggestion').accet_line()<CR>", "Accept Line" },
 	}
+
+	lvim.builtin.which_key.mappings["z"] = {
+		name = "Fold",
+		o = { ":zo<CR>", "Open fold" },
+		c = { ":zc<CR>", "Close fold" },
+		a = { ":za<CR>", "Toggle fold" },
+		R = { ":zR<CR>", "Open folds recursively" },
+		M = { ":zo<CR>", "Close fold recursively" },
+	}
+
+	lvim.builtin.which_key.mappings["F"] = {
+		name = "Quick Fix",
+		o = { ":copen<CR>", "Open Quick Fix" },
+		c = { ":cclose<CR>", "Close Quick Fix" },
+		n = { ":cnext<CR>", "Next Quick Fix" },
+		p = { ":cprev<CR>", "Previous Quick Fix" },
+		w = { ":cwindow<CR>", "Quick Fix Window List" },
+	}
 end
 
 return M

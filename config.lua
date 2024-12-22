@@ -16,6 +16,11 @@ lvim.keys.normal_mode["<S-l>"] = ":bn<cr>"
 vim.api.nvim_set_var("cursorhold_updatetime", 1000)
 -- lvim.format_on_save = false
 
+-- custom options
+vim.opt.wrap = true
+-- vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
 local _, actions = pcall(require, "telescope.actions")
